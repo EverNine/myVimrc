@@ -13,8 +13,18 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'tpope/vim-rails'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplcache.vim'
+Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
