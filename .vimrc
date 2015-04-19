@@ -35,6 +35,11 @@ Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'othree/html5.vim'
+Plugin 'myhere/vim-nodejs-complete'
+Plugin 'pangloss/vim-javascript'
+Plugin 'briancollins/vim-jst'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'tpope/vim-endwise'
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -62,6 +67,8 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+"auto-format
+autocmd BufWrite * :Autoformat
 
 "powerline
 set laststatus=2
@@ -72,16 +79,16 @@ set encoding=utf-8
 "multiple cursor
 " Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
+    if exists(':NeoCompleteLock')==2
+        exe 'NeoCompleteLock'
+    endif
 endfunction
 
 " Called once only when the multiple selection is canceled (default <Esc>)
 function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
+    if exists(':NeoCompleteUnlock')==2
+        exe 'NeoCompleteUnlock'
+    endif
 endfunction
 
 " other
@@ -118,17 +125,17 @@ let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
 
 command! Tex call Tex()
 function! Tex()
-	w
-	!latex %
-	silent !dvipdfmx %:r
-	silent !okular %:r.pdf
+    w
+    !latex %
+    silent !dvipdfmx %:r
+    silent !okular %:r.pdf
 endfunction
 
 command! Xetex call XeTex()
 function! XeTex()
-	w
-	!xelatex -shell-escape %
-	silent !okular %:r.pdf &
+    w
+    !xelatex -shell-escape %
+    silent !okular %:r.pdf &
 endfunction
 
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
@@ -140,8 +147,8 @@ func! CompileGcc()
     if search("mpi\.h") != 0
         let compilecmd = "!mpicc " 
     endif 
-	short fat[7M/512] = readFAT();
-	byte dir[32*mDIR] = readDir();
+    short fat[7M/512] = readFAT();
+    byte dir[32*mDIR] = readDir();
     if search("glut\.h") != 0
         let compileflag .= " -lglut -lGLU -lGL " 
     endif 
@@ -179,7 +186,7 @@ func! CompileGpp()
 endfunc
 
 "func! RunPython() 
-        "exec "!python %" 
+"exec "!python %" 
 "endfunc
 func! CompileJava() 
     exec "!javac %" 
@@ -187,56 +194,56 @@ endfunc
 
 
 func! CompileCode() 
-        exec "w" 
-        if &filetype == "cpp" 
-                exec "call CompileGpp()" 
-        elseif &filetype == "c" 
-                exec "call CompileGcc()" 
-        elseif &filetype == "python" 
-                exec "call RunPython()" 
-        elseif &filetype == "java" 
-                exec "call CompileJava()" 
-        elseif &filetype == "haskell" 
-                exec "!ghc %" 
-        endif 
+    exec "w" 
+    if &filetype == "cpp" 
+        exec "call CompileGpp()" 
+    elseif &filetype == "c" 
+        exec "call CompileGcc()" 
+    elseif &filetype == "python" 
+        exec "call RunPython()" 
+    elseif &filetype == "java" 
+        exec "call CompileJava()" 
+    elseif &filetype == "haskell" 
+        exec "!ghc %" 
+    endif 
 endfunc
 
 func! RunResult() 
-        exec "w" 
-        if search("mpi\.h") != 0
-            exec "!mpirun -np 4 ./%<" 
-        elseif &filetype == "cpp" 
-            exec "! ./%<" 
-        elseif &filetype == "c" 
-            exec "! ./%<" 
-        elseif &filetype == "python" 
-            exec "!python %"
-            "exec "call RunPython" 
-        elseif &filetype == "java" 
-            exec "!java %<" 
-        elseif &filetype == "ruby" 
-            exec "!ruby -w %" 
-        elseif &filetype == "haskell" 
-            exec "!runghc %" 
-        endif 
+    exec "w" 
+    if search("mpi\.h") != 0
+        exec "!mpirun -np 4 ./%<" 
+    elseif &filetype == "cpp" 
+        exec "! ./%<" 
+    elseif &filetype == "c" 
+        exec "! ./%<" 
+    elseif &filetype == "python" 
+        exec "!python %"
+        "exec "call RunPython" 
+    elseif &filetype == "java" 
+        exec "!java %<" 
+    elseif &filetype == "ruby" 
+        exec "!ruby -w %" 
+    elseif &filetype == "haskell" 
+        exec "!runghc %" 
+    endif 
 endfunc
 
 func! RunWithInput() 
-        exec "w" 
-        if search("mpi\.h") != 0
-            exec "!mpirun -np 4 ./%< < in.txt" 
-        elseif &filetype == "cpp" 
-            exec "! ./%< < in.txt" 
-        elseif &filetype == "c" 
-            exec "! ./%< < in.txt" 
-        elseif &filetype == "python" 
-            exec "!python % < in.txt"
-            "exec "call RunPython" 
-        elseif &filetype == "java" 
-            exec "!java %< < in.txt" 
-        elseif &filetype == "ruby" 
-            exec "!ruby -w % < in.txt" 
-        endif 
+    exec "w" 
+    if search("mpi\.h") != 0
+        exec "!mpirun -np 4 ./%< < in.txt" 
+    elseif &filetype == "cpp" 
+        exec "! ./%< < in.txt" 
+    elseif &filetype == "c" 
+        exec "! ./%< < in.txt" 
+    elseif &filetype == "python" 
+        exec "!python % < in.txt"
+        "exec "call RunPython" 
+    elseif &filetype == "java" 
+        exec "!java %< < in.txt" 
+    elseif &filetype == "ruby" 
+        exec "!ruby -w % < in.txt" 
+    endif 
 endfunc
 
 map <F5> :call CompileCode()<CR> 
@@ -248,3 +255,7 @@ map <F7> :call RunWithInput()<CR>
 nnoremap <F4> :UndotreeToggle<cr>
 nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <F2> :TlistToggle<cr>
+nmap <leader>cn :cn<cr>
+nmap <leader>cp :cp<cr>
+nmap <leader>cw :cw 10<cr> 
+nmap <leader>cl :cl<cr>
