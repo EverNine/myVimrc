@@ -29,8 +29,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'moll/vim-node'
 Plugin 'vim-scripts/MultipleSearch2.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
 Plugin 'gorodinskiy/vim-coloresque'
@@ -40,6 +40,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'briancollins/vim-jst'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-endwise'
+Plugin 'itchyny/calendar.vim'
+Plugin 'Mastermind-board-game'
+Plugin 'a.vim'
+Plugin 'uguu-org/vim-matrix-screensaver'
+Plugin 'DrawIt'
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -117,6 +123,7 @@ set smarttab
 set magic
 set mouse=a
 autocmd FileType ruby set shiftwidth=2 | set tabstop=2
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_disable_auto_complete = 1
@@ -185,9 +192,9 @@ func! CompileGpp()
   exec compilecmd." % ".compileflag
 endfunc
 
-"func! RunPython() 
-"exec "!python %" 
-"endfunc
+func! CompilePython() 
+    exec "!python -m py_compile %" 
+endfunc
 func! CompileJava() 
   exec "!javac %" 
 endfunc
@@ -200,7 +207,7 @@ func! CompileCode()
   elseif &filetype == "c" 
     exec "call CompileGcc()" 
   elseif &filetype == "python" 
-    exec "call RunPython()" 
+    exec "call CompilePython()" 
   elseif &filetype == "java" 
     exec "call CompileJava()" 
   elseif &filetype == "haskell" 
@@ -217,8 +224,7 @@ func! RunResult()
   elseif &filetype == "c" 
     exec "! ./%<" 
   elseif &filetype == "python" 
-    exec "!python %"
-    "exec "call RunPython" 
+    exec "!python __pycache__/%<.*.pyc || python %"
   elseif &filetype == "java" 
     exec "!java %<" 
   elseif &filetype == "ruby" 
@@ -237,13 +243,16 @@ func! RunWithInput()
   elseif &filetype == "c" 
     exec "! ./%< < in.txt" 
   elseif &filetype == "python" 
-    exec "!python % < in.txt"
-    "exec "call RunPython" 
+    exec "!python __pycache__/%<.*.pyc < in.txt || python % < in.txt"
   elseif &filetype == "java" 
     exec "!java %< < in.txt" 
   elseif &filetype == "ruby" 
     exec "!ruby -w % < in.txt" 
   endif 
+endfunc
+
+func! MakeTag()
+  exec "!ctags -R --fields=+lS"
 endfunc
 
 map <F5> :call CompileCode()<CR> 
@@ -252,6 +261,7 @@ vmap <F5> <ESC>:call CompileCode()<CR>
 
 map <F6> :call RunResult()<CR>
 map <F7> :call RunWithInput()<CR>
+map <F12> :call MakeTag()<CR><CR>
 nnoremap <F4> :UndotreeToggle<cr>
 nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <F2> :TlistToggle<cr>
