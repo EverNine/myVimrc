@@ -43,8 +43,14 @@ Plugin 'tpope/vim-endwise'
 Plugin 'itchyny/calendar.vim'
 Plugin 'Mastermind-board-game'
 Plugin 'a.vim'
-Plugin 'uguu-org/vim-matrix-screensaver'
 Plugin 'DrawIt'
+Plugin 'TeTrIs.vim'
+Plugin 'bling/vim-bufferline'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -75,6 +81,17 @@ filetype plugin indent on    " required
 
 "auto-format
 "autocmd BufWrite * :Autoformat
+
+"notes
+:let g:notes_directories = ['~/Documents/Notes']
+
+"limelight
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 
 "powerline
 set laststatus=2
