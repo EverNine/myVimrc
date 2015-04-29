@@ -51,6 +51,7 @@ Plugin 'junegunn/limelight.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+Plugin 'aaronbieber/vim-quicktask'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -81,6 +82,16 @@ filetype plugin indent on    " required
 
 "auto-format
 "autocmd BufWrite * :Autoformat
+
+"calendar
+"let g:calendar_google_calendar = 1
+"let g:calendar_google_task = 1
+
+"quicktask
+let g:quicktask_snip_path = '~/Documents/snips'
+
+"goyo
+nnoremap <Leader>z :Goyo<CR>
 
 "notes
 :let g:notes_directories = ['~/Documents/Notes']
@@ -146,6 +157,14 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_disable_auto_complete = 1
 let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
 
+command! Todo call Todo()
+function! Todo()
+    exec "w"
+    :Goyo
+    e ~/todo.quicktask
+    set nospell
+    set foldlevel=1
+endfunction
 
 command! Tex call Tex()
 function! Tex()
