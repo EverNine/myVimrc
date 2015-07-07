@@ -52,6 +52,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'aaronbieber/vim-quicktask'
+Plugin 'wavded/vim-stylus'
+Plugin 'digitaltoad/vim-jade'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -151,6 +153,7 @@ set smarttab
 set magic
 set mouse=a
 autocmd FileType ruby set shiftwidth=2 | set tabstop=2
+autocmd FileType javascript set shiftwidth=2 | set tabstop=2
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 let g:neocomplcache_enable_at_startup = 1
@@ -161,7 +164,7 @@ command! Todo call Todo()
 function! Todo()
     exec "w"
     :Goyo
-    e ~/todo.quicktask
+    silent e ~/todo.quicktask
     set nospell
     set foldlevel=1
 endfunction
@@ -267,6 +270,8 @@ func! RunResult()
     exec "!ruby -w %" 
   elseif &filetype == "haskell" 
     exec "!runghc %" 
+  elseif &filetype == "javascript" 
+    exec "!node % < in.txt" 
   endif 
 endfunc
 
@@ -284,6 +289,10 @@ func! RunWithInput()
     exec "!java %< < in.txt" 
   elseif &filetype == "ruby" 
     exec "!ruby -w % < in.txt" 
+  elseif &filetype == "haskell" 
+    exec "!runghc % < in.txt" 
+  elseif &filetype == "javascript" 
+    exec "!node % < in.txt" 
   endif 
 endfunc
 
@@ -292,7 +301,7 @@ func! MakeTag()
 endfunc
 
 map <F5> :call CompileCode()<CR> 
-imap <F5> <ESC>:call CompileCode(<CR>) 
+imap <F5> <ESC>:call CompileCode()<CR>
 vmap <F5> <ESC>:call CompileCode()<CR> 
 
 map <F6> :call RunResult()<CR>
