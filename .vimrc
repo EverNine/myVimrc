@@ -54,6 +54,7 @@ Plugin 'xolox/vim-notes'
 Plugin 'aaronbieber/vim-quicktask'
 Plugin 'wavded/vim-stylus'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'klen/python-mode'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -88,6 +89,11 @@ filetype plugin indent on    " required
 "calendar
 "let g:calendar_google_calendar = 1
 "let g:calendar_google_task = 1
+
+"tag-list
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Show_One_File = 1
+let Tlist_Use_Right_Window = 1
 
 "quicktask
 let g:quicktask_snip_path = '~/Documents/snips'
