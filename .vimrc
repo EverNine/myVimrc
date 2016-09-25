@@ -166,6 +166,9 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_disable_auto_complete = 1
 let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
 
+command! W :execute 'silent w !sudo tee % > /dev/null' | :e!
+command! WQ :execute 'silent w !sudo tee % > /dev/null' | :q!
+
 command! Todo call Todo()
 function! Todo()
     exec "w"
