@@ -90,6 +90,15 @@ filetype plugin indent on    " required
 "let g:calendar_google_calendar = 1
 "let g:calendar_google_task = 1
 
+"python-mode
+"let g:pymode_rope = 0
+let g:pymode_options_max_line_length = 79
+let g:pymode_trim_whitespaces = 1
+let g:pymode_folding = 1
+
+set cursorcolumn
+set cursorline
+
 "tag-list
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_One_File = 1
@@ -171,10 +180,7 @@ command! WQ :execute 'silent w !sudo tee % > /dev/null' | :q!
 
 command! Todo call Todo()
 function! Todo()
-    exec "w"
-    :Goyo
-    silent e ~/todo.quicktask
-    set nospell
+    silent split ~/Documents/todo.quicktask
     set foldlevel=1
 endfunction
 
